@@ -18,14 +18,14 @@ public class MyController {
     private BankAccountService bankAccountService;
 
     @RequestMapping("/")
-    public String showAllEmployees(Model model) {
+    public String showAllBankAccount(Model model) {
         List<BankAccount> allBankAccounts = bankAccountService.getAllAccounts();
         model.addAttribute("allAccounts", allBankAccounts);
         return "all-bankAccount";
     }
 
     @RequestMapping("/addNewBankAccount")
-    public String addNewEmployee(Model model) {
+    public String addNewBankAccount(Model model) {
         BankAccount bankAccount = new BankAccount();
         model.addAttribute("bankAccount", bankAccount);
         return "bankAccount-info";
@@ -33,20 +33,20 @@ public class MyController {
     }
 
     @RequestMapping("/saveBankAccount")
-    public String saveEmployee(@ModelAttribute("bankAccount") BankAccount bankAccount) {
+    public String saveBankAccount(@ModelAttribute("bankAccount") BankAccount bankAccount) {
         bankAccountService.saveBankAccount(bankAccount);
         return "redirect:/";
     }
 
     @RequestMapping("/updateInfo")
-    public String updateEmployee(@RequestParam("bank_accountId") int id, Model model) {
+    public String updateBankAccount(@RequestParam("bank_accountId") int id, Model model) {
         BankAccount bankAccount = bankAccountService.getBankAccount(id);
         model.addAttribute("bankAccount", bankAccount);
         return "bankAccount-info";
     }
 
     @RequestMapping("/deleteBankAccount")
-    public String deleteEmployee(@RequestParam("bank_accountId") int id, Model model) {
+    public String deleteBankAccount(@RequestParam("bank_accountId") int id, Model model) {
         bankAccountService.deleteBankAccount(id);
         return "redirect:/";
     }
